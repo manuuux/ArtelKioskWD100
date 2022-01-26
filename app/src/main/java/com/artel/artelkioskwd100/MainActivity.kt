@@ -33,6 +33,10 @@ import android.bluetooth.BluetoothProfile
 import android.bluetooth.BluetoothDevice
 
 import android.R.string.no
+import android.app.StatusBarManager
+
+
+
 
 
 
@@ -163,6 +167,7 @@ class MainActivity : AppCompatActivity() {
                 val dialogBtn_remove = dialog.findViewById<TextView>(R.id.txtClose)
                 dialogBtn_remove.setOnClickListener {
                     dialog.dismiss()
+                    showHide()
                     //activity!!.finish()
                 }
                 dialog.show()
@@ -171,11 +176,28 @@ class MainActivity : AppCompatActivity() {
         btnconfig.setOnClickListener(){
             val alert = ViewDialog()
             alert.showResetPasswordDialog(this)
-        }
+            showHide()
 
+
+        }
+    }
+    var shown = true
+    private fun showHide() {
+        val w = this.window
+        if (shown) {
+            w.setFlags(
+                0,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        } else {
+            w.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        shown = !shown
     }
 
-
-
-
 }
+
+
